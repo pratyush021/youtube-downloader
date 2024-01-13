@@ -1,14 +1,19 @@
 import argparse
 from pytube import YouTube
+import os
 
 def download_video(url, output_path, resolution):
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
     yt = YouTube(url)
-    print(yt.thumbnail_url)
-
-    # video = yt.streams.filter(res=resolution, file_extension="mp4").first()
-    # print(f"Downloading: {yt.title} ({resolution})")
-    # video.download(output_path)
-    # print("Download complete!")
+    if resolution not in ["360p", "480p", "720p"]: 
+        print("Not a valid resoltion")
+        return; 
+    str1 = yt.streams.filter(progressive=True).get_by_resolution(resolution=resolution)
+    print(f"Downloading: {yt.title} ({resolution})")
+    str1.download(output_path=
+                  output_path)
+    print("Download complete!")
 
 def main():
     parser = argparse.ArgumentParser(description="YouTube Video Downloader")
