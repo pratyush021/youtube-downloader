@@ -2,6 +2,7 @@ import argparse
 from pytube import YouTube
 import os
 from tqdm import tqdm
+import time 
 
 def download_video(url, output_path, resolution):
     if not os.path.exists(output_path):
@@ -13,9 +14,13 @@ def download_video(url, output_path, resolution):
         return; 
     str1 = yt.streams.filter(progressive=True).get_by_resolution(resolution=resolution)
     print(f"Downloading: {yt.title} ({resolution})...")
+    time1 = time.time()
     str1.download(output_path=
                   output_path)
-    print("Download complete!")
+    time2 = time.time() 
+    time2 = time2 - time1
+
+    print(f"Download complete in {time2} sec")
 
 def download_with_progress_bar(url, output): 
     if not os.path.exists(output): 
