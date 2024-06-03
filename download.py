@@ -4,6 +4,7 @@ import os
 from tqdm import tqdm
 import time 
 
+
 def download_video(url, output_path, resolution):
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -14,6 +15,8 @@ def download_video(url, output_path, resolution):
         return; 
     str1 = yt.streams.filter(progressive=True).get_by_resolution(resolution=resolution)
     print(f"Downloading: {yt.title} ({resolution})...")
+    yt.register_on_complete_callback(on_complete)
+    yt.register_on_progress_callback(on_progress)
     time1 = time.time()
     str1.download(output_path=
                   output_path)
@@ -36,8 +39,13 @@ def download_with_progress_bar(url, output):
                 pbar.update(len(chunk))
     print("Download complete")
 
-
-
+def on_progress(stream, chunk, bytes_remaining): 
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    per = bytes_downloaded/ total_size * 100 
+    print(f"progress: {per:.2f}%")
+def on_complete(stream, file_path):
+    print(f"Download complete: {file_path}")
 
 
 def main():
