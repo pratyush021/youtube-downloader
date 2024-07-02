@@ -20,11 +20,12 @@ python3 download.py [URL] -o [OUTPUT LOCATION] -r [RESOLUTION]
 	pytube: A library specifically designed to download youtube videos
 	
 2. Initial features: 
-	1. accepet video url as input 
-	2. fetch video info 
-	3. selecting video quality 
-	4. download the video 
-	5. progress indicator
+	1. accepet video url as input - done 
+	2. fetch video info - done 
+	3. selecting video quality - done 
+	4. download the video - done 
+	5. progress indicator - done 
+    6. download video with respolution more than 1080p 
 3. Not using DASH streams as I don't want to have to merge both audio and video codec. Once the core features are done, I'll do DASH. 
 
 

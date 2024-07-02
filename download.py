@@ -5,6 +5,7 @@ from tqdm import tqdm
 import time 
 
 
+
 def download_video(url, output_path, resolution):
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -38,6 +39,9 @@ def download_with_progress_bar(url, output):
                 file.write(chunk)
                 pbar.update(len(chunk))
     print("Download complete")
+
+# write unit  test for on_progress function
+
 
 def on_progress(stream, chunk, bytes_remaining): 
     total_size = stream.filesize
